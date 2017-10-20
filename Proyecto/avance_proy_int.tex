@@ -1,0 +1,411 @@
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice. 
+
+\documentclass{beamer}
+
+% There are many different themes available for Beamer. A comprehensive
+% list with examples is given here:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+% You can uncomment the themes below if you would like to use a different
+% one:
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{boxes}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{default}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\title{Quantum Oscillations}
+
+% A subtitle is optional and this may be deleted
+%\subtitle{Optional Subtitle}
+
+\author{Daniel Forero\inst{1} \and Gustavo Ardila\inst{1}}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[Universidad de Los Andes] % (optional, but mostly needed)
+{
+  \inst{1}%
+  Physics Department\\
+  Universidad de Los Andes
+  }
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date{SSP 201710}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+%\subject{Theoretical Computer Science}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+ \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo}
+ \logo{\pgfuseimage{university-logo}}
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+% Let's get started
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+
+% Section and subsections will appear in the presentation overview
+% and table of contents.
+\section{Landau Diamagnetism}
+
+\subsection{Quick Theory}
+
+\begin{frame}{Landau Diamagnetism}
+  Diamagnetism is caused by the electrons below the Fermi surface, organizing themselves in quantum levels (Landau levels) when a magnetic field $\vec{B}$ is present. The hamiltonian for this system is:
+  \begin{equation}
+      H=\frac{(\vec{p}-(e/c)\vec{A})^2}{2m} - \vec{\mu}\cdot\vec{B}
+      \label{eq:min_ham}
+  \end{equation}
+  Which is equivalent, in the Landau gauge ($\vec{A} = -By \hat{i}$ ), and choosing $\psi(x, y, z)=\exp{i(k_xx+k_zz)}\phi(y)$, a solution that allows us to separate the Schrödinger equation into $x, y$ and $z$, to:
+  \begin{equation}
+      H= \left(\frac{(\hbar k_x+(e/c)By)^2}{2m}+\frac{p_y^2}{2m}+\frac{\hbar^2 k_z^2}{2m}\right)- \vec{\mu}\cdot\vec{B}
+      \label{eq:min_ham_gauge}
+  \end{equation}
+\end{frame}
+
+\begin{frame}
+   And can be rearranged into:
+   \begin{equation}
+       H=\frac{p_y^2}{2m} + \frac{e^2B^2}{c^2m^2}\frac{1}{2m}\left(y+\frac{\hbar k_x}{m}\frac{mc}{eB}\right)^2 + \frac{\hbar^2k_z^2}{2m}-\frac{g\mu_B}{\hbar}\vec{S}\cdot\vec{B}
+   \end{equation}
+   Or, more conveniently:
+    \begin{equation}
+       H=\frac{p_y^2}{2m} + \frac{\omega_c^2}{2m}(y-y_0)^2 + \frac{\hbar^2k_z^2}{2m}-\frac{g\mu_B}{\hbar}\vec{S}\cdot\vec{B}
+   \end{equation}
+   Which has eigenvalues:
+   \begin{equation}
+       E=\frac{\hbar^2k_z^2}{2m} + \hbar\omega_c\left(n+\frac{1}{2}\right) - g\mu_Bm_sB
+       \label{eq:land_eigvals}
+   \end{equation}
+\end{frame}
+\begin{frame}
+  Recalling, in equation \ref{eq:land_eigvals} we have considered that:
+  \begin{equation}
+      \psi(x, y, z)=\exp{i(k_xx+k_zz)}\phi(y)
+      \label{eq:free_app}
+  \end{equation}
+  that means that we have assumed a free electron solution for the Schrödinger equation. If we apply the same nearly free electron approximation done in class, we should end up with:
+     \begin{equation}
+       E=\frac{\hbar^2k_z^2}{2m^*} + \hbar\omega^*_c\left(n+\frac{1}{2}\right) - g_{eff}\mu_Bm_sB
+       \label{eq:land_eigvals_nfe}
+   \end{equation}
+  The last equation defines the Landau levels' quantization. The last term can be seen as a further splitting of each Landau level due to spin.
+\end{frame}
+\begin{frame}{Landau levels picture}
+  \begin{figure}
+      \centering
+      \includegraphics[width=0.3\linewidth]{land_lev_pict}
+      \caption{Picture of the Landau levels (cylinders) inside the Fermi surface (sphere). From \cite{dresselhaus}.}
+      \label{fig:land_lev_pict}
+  \end{figure}
+\end{frame}
+\begin{frame}{Dispersion}
+  The dispersion relation will then be
+  \begin{figure}
+      \centering
+      \includegraphics[width=0.5\linewidth]{landau_levels}
+      \caption{Dispersion relation for Landau diamagnetism}
+      \label{fig:landau_diam_disp}
+  \end{figure}
+  
+\end{frame}
+\begin{frame}{Degeneracy}
+    Each of the energies in equation \ref{eq:land_eigvals_nfe} are highly degenerate. Degenerancy arises from the crystaline structure of the material since we must constrain 
+    \begin{equation}
+        -L_y/2<y_0<L_y/2
+    \end{equation}
+    that means that the oscillations are centered \textbf{inside} the sample. This gives the limits in $k_x$ as 
+    \begin{equation}
+        k_x<\lvert\frac{m^*\omega_c^*L_y}{2\hbar}\rvert=\lvert k_{x,ext}\rvert
+    \end{equation}
+    
+\end{frame}
+\begin{frame}{Degeneracy}
+  
+ This way, the summation on all the possibles $k_x$ is done in the usual way
+ \begin{equation}
+     \sum_{k_x=-k_{x,ext}}^{+k_{x,ext}} \rightarrow \frac{L_x}{2\pi}\int_{-k_{x,ext}}^{+k_{x,ext}}dk_x=\frac{L_x}{2\pi}\frac{m^*\omega_c^*L_y}{\hbar}=\frac{S_xm^*\omega_c^*}{2\pi\hbar}=g
+     \label{eq:deg}
+ \end{equation}
+
+ Equation \ref{eq:deg} then defines the degenerancy $g=eBS_x/2\pi\hbar$ of each Landau level.
+\end{frame}
+\begin{frame}{Density of states}
+  If we wish to calculate the density of states $D_B(E)=\frac{\partial n}{\partial E}$ for a given field $B$, we need to calculate 
+  \begin{equation}
+      n=2g\sum_n\int_{-\pi/a}^{\pi/a}f_{FD}dk_z
+  \end{equation}
+  In order to be able to observe the phenomenon, the mean free time $\tau$ of the electrons has to be higher than the period of the oscillation itself, this means $\omega_c^*\tau>>1$. This is achieved by using a large $B$ (to increase $\omega_c^*$) and a low temperature $T\rightarrow0$ (in order to increase $\tau$).
+\end{frame}
+\begin{frame}
+  In this limit $f_{FD}\rightarrow 1-\Theta(E_F)$.\\
+  From the eigenvalues of the hamiltonian, we have that 
+  \begin{equation}
+      k_z=\left(\frac{2eB}{c\hbar}\right)^{1/2}\sqrt{\frac{E}{\hbar\omega_c}-\left(n+\frac{1}{2}\right)}
+  \end{equation}
+  Then
+  \begin{equation}
+      dk_z=\left(\frac{2eB}{c\hbar}\right)^{1/2}\frac{dE}{2\hbar\omega_c^*}\left[\frac{E}{\hbar\omega_c^*}-\left(n+\frac{1}{2}\right)\right]^{-1/2}
+  \end{equation} 
+     
+\end{frame}
+
+\begin{frame}
+  The integration will then yield to 
+  \begin{equation}
+      n=\frac{eB}{\pi^2\hbar c}\sum_n k_z|_{E=E_F}
+  \end{equation}
+  So we finally get
+  \begin{equation}
+      D_B(E)=\frac{eB}{\pi^2\hbar c}\left(\frac{2eB}{c\hbar}\right)^{1/2}\frac{1}{2\hbar\omega_c^*}\sum_n\left[\frac{E}{\hbar\omega_c^*}-\left(n+\frac{1}{2}\right)\right]^{-1/2}
+      \label{eq:d_states}
+  \end{equation}
+  The density of states for the $n$-th Landau level.
+ \end{frame}
+ 
+ \begin{frame}
+   Recall the curve formed by the maximum values of resonance curves has the shape shown in the left figure (blue) and can be compared with the curves in the right (all but blue).
+   \begin{figure}
+       \centering
+       \includegraphics[width=0.5\linewidth]{res_wik}
+       \includegraphics[width=0.5\linewidth]{density_states}
+        
+       \caption{Left: Resonance curves for an oscillating system, found \underline{\href{https://en.wikipedia.org/wiki/Resonance#/media/File:Resonance.PNG}{here}}. Right: Comparable curves for the density of states $D_B$.}
+       \label{fig:res_wik}
+   \end{figure}
+ \end{frame}
+ 
+ \begin{frame}
+    Since the curves in the right show a similar behavior to the blue one in the left, we can conclude that the density of states has some oscillating properties. This is what we call \textbf{quantum oscillations}.\\
+    We can deduce that the resonance condition will be 
+    \begin{equation}
+        \frac{E}{\hbar\omega_c^*}=n+\frac{1}{2}
+    \end{equation}
+    Since electrons do not want to skip the band gap, i.e. they will not go past $E_F$, we can set the condition to
+    \begin{equation}
+        E_F=\hbar\omega_c^*\left(n+\frac{1}{2}\right)
+        \label{eq:resonance_cond}
+    \end{equation}
+ \end{frame}
+ \begin{frame}
+   This means that resonance will occur whenever the $n$-th Landau level tries to pass through the Fermi surface. Given that $\omega_c^* \propto B$ we can define a period $$T=\frac{1}{B_n} - \frac{1}{B_{n-1}}$$where $B_n$ is the field that causes the $n$-th Landau level to pass through the Fermi surface. When replacing the resonance condition \ref{eq:resonance_cond}, we get
+   \begin{equation}
+       T=\frac{e\hbar}{m^*E_Fc}
+       \label{eq:period_res}
+   \end{equation}
+   The \textbf{period} of our quantum oscillations.
+ \end{frame}
+% You can reveal the parts of a slide one at a time
+% with the \pause command:
+
+\section{Using the quantum oscillations}
+\subsection{Why?}
+\begin{frame}
+\begin{itemize}
+    \item Quantum oscillations allows the study of the properties of the Fermi surface and of the material itself. 
+    \item De Haas - Van Alphen effect allows us to study the shape (and therefore the topology) of the Fermi surface
+    \item Cyclotron resonance allows to study the components of the effective mass tensor.
+\end{itemize}
+
+\end{frame}
+\subsection{Cyclotron resonance}
+\begin{frame}
+  Suppose we have a transition of an electron between two Landau levels, this transition is given by
+  \begin{equation}
+      \hbar \omega_c ^*= E_n - E_{n-1}
+      \label{eq:dif}
+  \end{equation}
+  As we're working with the Landau quantization model, the dispersion relation given in equation \ref{eq:land_eigvals_nfe} gives us a parabolic band structure with a subband for each spin state of the electrons.
+  
+\end{frame}
+\begin{frame}
+  \begin{figure}
+      \centering
+      \includegraphics[scale=0.65]{landau_levels_bands.png}
+      \caption{Band-Subband structure for a quadratic dispersion relation}
+      \label{fig:my_label}
+  \end{figure}
+\end{frame}
+\begin{frame}
+  Note that the difference in energy depends only on the cyclotron frequency of the carriers, this implies that not only the electrons but the holes can be tested in resonance experiments.
+  
+  Most common resonance experiments are made using microwave cavities such that the resonance happens at different values of B (as the states are degenerate). As microwaves are commonly low energy ones, the possible transitions will be 
+  \begin{equation}
+      \Delta n=\pm 1
+  \end{equation}
+Finally as the transition frequency depends directly on the magnetic field, we can study the effects of varying $\vec{B}$ direction on the effective mass, it will give us a mass tensor\cite{dresselhaus}.
+\end{frame}
+
+\subsection{ Haas–van Alphen effect}
+\begin{frame}
+  \begin{itemize}
+      \item Landau levels separation is proportional to B.
+      \item Increasing B will cause that some occupied levels can cross the Fermi surface.
+      \item Electrons will fall to lower energy levels as they can't cross the band Gap, this will cause an oscillating effect.
+      \item Oscillations in the density of states due the increasing of the magnetic field will be acquired also by measurable quantities such as $\rho_e$,$R_H$, and mainly by $\chi_m$.
+      \item Oscillations in the magnetic susceptibility is known as De Haas - Van Alphen effect.
+  \end{itemize}
+\end{frame}
+\begin{frame}
+  \begin{itemize}
+      \item Recall that the period of the Landau oscillations is given by
+      \begin{equation}
+          T=\frac{e\hbar}{m^* E_F c}
+      \end{equation}
+      we can replace the Fermi energy as$E_F= \hbar^2 k_F^2/2m^*$. Now as the Fermi surface for a parabolic dispersion relation is spherical (or similar at least) we know that a surface element in the k-space is given by $\sigma= \pi k_F^2$.
+      \item Oscillation period just becomes
+      \begin{equation}
+          T=\frac{2\pi e}{c\hbar\sigma}
+          \label{eq:per}
+      \end{equation}
+      \end{itemize}
+\end{frame}
+\begin{frame}
+  \begin{itemize}
+      \item Oscillation period is proportional to the inverse of the cross section of the Fermi surface$\rightarrow$ true even if the surface is not spherical.
+      \item Consider the extrema of the surface.
+      \item One can measure the components of the mass tensor by mapping the sample with the magnetic field.
+      \item The different cross sections of the Fermi surface can be studied by changing the direction of the magnetic field. By using this technique it is relatively easy to get a complete map of the surface.
+     
+  \end{itemize}
+\end{frame}
+\begin{frame}
+
+  \begin{figure}
+      \centering
+      \includegraphics[scale=0.4]{fermi.png}
+      \caption{Arbitrary Fermi surface with extrema. Taken from\cite{dresselhaus}}
+      \label{fig:fermi}
+  \end{figure}
+\end{frame}
+\begin{frame}
+  \begin{figure}
+      \centering
+      \includegraphics[scale=0.3]{osci.png}
+      \includegraphics[scale=0.3]{ferm_surf_Ag.png}
+
+      \caption{Oscillations (left) that map the Ag Fermi Surface (right) with $\vec{B}$ along direction (111). Taken from  \cite{dresselhaus}}
+      \label{fig:osci}
+  \end{figure}
+ 
+\end{frame}
+\begin{frame}
+   In the light of equation \ref{eq:period_res} which is basically $T \propto \sigma^{-1}$, we can see that the high-frequency oscillations in figure \ref{fig:osci}, left side, are related with the large cross-sectional area in the Ag Fermi surface, while the long oscillating, low-frequency part of the figure is related to the smaller cross-sectional areas of the surface shown in the right side of the figure.
+\end{frame}
+
+
+% Placing a * after \section means it will not show in the
+% outline or table of contents.
+\section*{Summary}
+
+\begin{frame}{Summary}
+  \begin{itemize}
+  \item
+    Landau diamagnetism is consequence of the interaction with an EM field.
+  \item
+    Oscillatory properties of $D_B(E)$ are reflected in MANY observables of a system such as $\chi$.
+  \item The Cyclotron resonance and the De Haas - Van Alphen effect are direct consequences of Landau Diamagnetism and as oscillatory phenomena allows to study the structure of the materials.
+  \item A perodic table of the mapped Fermi surfaces can be found \href{http://www.phys.ufl.edu/fermisurface/periodic_table.html}{here}
+  \end{itemize}
+ 
+\end{frame}
+
+
+
+% All of the following is optional and typically not needed. 
+\appendix
+\section<presentation>*{\appendixname}
+\subsection<presentation>*{For Further Reading}
+
+\begin{frame}[allowframebreaks]
+  \frametitle<presentation>{For Further Reading}
+    
+  \begin{thebibliography}{10}
+    
+  \beamertemplatebookbibitems
+  % Start with overview books.
+
+  \bibitem{ashcroft}
+    N.W. Ashcroft and N. D. Mermin.
+    \newblock {\em Solid State Physics}.
+    \newblock Cornell University, 1976.
+
+   \bibitem{ibach}
+    H. Ibach and H. Lüth
+    \newblock {\em Solid-State Physics: An introduction to Theory and Experiment}.
+    \newblock Cornell University, 1976.
+    
+  \beamertemplatearticlebibitems
+  % Followed by interesting articles. Keep the list short. 
+
+   \bibitem{dresselhaus}
+    M.S. Dresselhaus.
+    \newblock {\em Solid State Physics Part III: Magnetic Properties of Solids}.
+    \newblock Solid State Physics MIT course, 2001.
+
+ 
+  \end{thebibliography}
+\end{frame}
+
+\end{document}
+
+
